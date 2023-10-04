@@ -1,0 +1,91 @@
+# See dunst(5) for all configuration options
+
+
+[global]
+
+    monitor = 0
+
+    ### Geometry ###
+    
+    width = 300
+    height = 300
+    origin = top-right
+    offset = 10x50
+    scale = 0
+    notification_limit = 20
+    
+    ### Progress bar ###
+
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 0
+    icon_corner_radius = 0
+
+    indicate_hidden = yes
+    transparency = 0
+
+    separator_height = 2
+    padding = 8
+    horizontal_padding = 8
+    text_icon_padding = 0
+    frame_width = 3
+ 
+    frame_color = "#89B4FA"
+    separator_color= frame
+
+
+    ### Text ###
+
+    font = JetBrainsMono Nerd Font 12
+    line_height = 0
+    markup = full
+
+
+    format = "<b>%s</b>\n%b"
+
+    # Alignment of message text.
+    # Possible values are "left", "center" and "right".
+    alignment = left
+
+    # Vertical alignment of message text and icon.
+    # Possible values are "top", "center" and "bottom".
+    vertical_alignment = center
+
+    # Show age of message if message is older than show_age_threshold
+    # seconds.
+    # Set to -1 to disable.
+    show_age_threshold = 60
+
+    # Specify where to make an ellipsis in long lines.
+    # Possible values are "start", "middle" and "end".
+    ellipsize = middle
+
+    # Ignore newlines '\n' in notifications.
+    ignore_newline = no
+
+    # Stack together notifications with the same content
+    stack_duplicates = true
+
+    # Hide the count of stacked notifications with the same content
+    hide_duplicate_count = false
+
+    # Display indicators for URLs (U) and actions (A).
+    show_indicators = yes
+
+
+[urgency_low]
+    background = "#1E1E2E"
+    foreground = "#CDD6F4"
+
+[urgency_normal]
+    background = "#1E1E2E"
+    foreground = "#CDD6F4"
+
+[urgency_critical]
+    background = "#1E1E2E"
+    foreground = "#CDD6F4"
+    frame_color = "#FAB387"
+
