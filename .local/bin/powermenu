@@ -1,0 +1,13 @@
+#!/bin/bash
+
+chosen=$(printf "  Power Off\n  Restart\n  Suspend\n  Lock" | rofi -dmenu -i -theme-str '@import "power.rasi"')
+
+case "$chosen" in
+	"  Power Off") poweroff ;;
+	"  Restart") reboot ;;
+	"  Suspend") systemctl suspend ;;
+	"  Lock") qtile cmd-obj -o cmd -f shutdown ;;
+	*) exit 1 ;;
+esac
+
+# -theme-str '@import "power.rasi"'
