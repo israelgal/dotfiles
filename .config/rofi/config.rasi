@@ -11,7 +11,6 @@ configuration {
   display-window: "Window";
   display-calc: "Calc";
   display-emoji: "Emoji";
-
   sidebar-mode: true;
 }
 
