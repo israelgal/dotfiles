@@ -160,7 +160,7 @@ screens = [
                 #widget.CurrentLayout(),
                 widget.GroupBox(),
                 widget.Prompt(),
-                widget.WindowName(),
+                #widget.WindowName(),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
@@ -171,8 +171,9 @@ screens = [
                 #widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                widget.Spacer(),
                 widget.Systray(),
-                widget.Clock(format="%d-%m-%Y %a %I:%M %p"),
+                widget.Clock(format="%a %I:%M %p"),
                 widget.QuickExit(),
             ],
             24,
