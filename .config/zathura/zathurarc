@@ -1,0 +1,7 @@
+#Global configurations
+
+set recolor
+
+set selection-clipboard clipboard 
+include catppucin-mocha
+iset sandbox none 
