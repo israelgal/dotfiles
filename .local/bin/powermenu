@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chosen=$(printf "  Power Off\n  Restart\n  Suspend\n  Lock" | rofi -dmenu -i -theme-str '@import "power.rasi"')
+chosen=$(printf "  Power Off\n  Restart\n  Suspend\n  Lock" | rofi -dmenu -i -theme-str '@import "power.rasi"' -p "Power")
 
 case "$chosen" in
 	"  Power Off") poweroff ;;
