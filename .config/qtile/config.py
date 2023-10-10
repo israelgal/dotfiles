@@ -30,6 +30,7 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import hook
+from libqtile.widget.textbox import TextBox
 
 mod = "mod4"
 terminal = "alacritty"
@@ -55,7 +56,13 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("changevolume up"), desc="Raises the volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("changevolume down"), desc="Lower the volume"),
     Key([], "XF86AudioMute", lazy.spawn("changevolume mute"), desc="Mute"),
-    
+
+   
+    # Toggle Fullscreen mode 
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle Fullscreen"),
+
+    # Toggle floating mode 
+    Key([mod,'shift'], "c", lazy.window.toggle_floating(), desc="Toggle floating"),
 
 
     # Switch between windows
@@ -192,9 +199,11 @@ screens = [
 
                 widget.Systray(),
 
-                widget.Clock(format="%a %I:%M %p"),
+                widget.Clock(format=" %a  %I:%M%p", padding = 10),
 
-
+                widget.TextBox(fmt = ' ',
+                               mouse_callbacks = {"Button1": lazy.spawn('powermenu')},                               padding = 10
+                               )
             ],
             size = 24,
             background = Catppuccin[2]
