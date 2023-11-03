@@ -23,6 +23,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
+
 import os
 import subprocess
 from libqtile import bar, layout, widget
@@ -34,6 +36,12 @@ from libqtile.widget.textbox import TextBox
 
 mod = "mod4"
 terminal = "alacritty"
+
+#The that I'm currently using
+Catppuccin = [["#a6e3a1", "#a6e3a1"],
+            ["#cba6f7", "#cba6f7"],
+            ['#313244', '#313244']]
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -75,8 +83,6 @@ keys = [
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-
-
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
@@ -85,8 +91,6 @@ keys = [
 
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-
-
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
@@ -99,8 +103,6 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-
-
     Key(
         [mod, "shift"],
         "Return",
@@ -108,6 +110,7 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -145,30 +148,14 @@ for i in groups:
 #This is my layout, I write this 
 layout_theme = {
         "border_width":3,
-        "margin":15,
+        "margin":8,
         "border_focus":"#a6e3a1",
         "border_normal":"#cba6f7"
 }
 
-Catppuccin = [["#a6e3a1", "#a6e3a1"],
-            ["#cba6f7", "#cba6f7"],
-            ['#313244', '#313244']]
-
 
 layouts = [
-    #layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    #layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
     layout.MonadTall(**layout_theme),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
 ]
 
 widget_defaults = dict(

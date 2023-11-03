@@ -2,6 +2,9 @@
 
 set recolor
 
+map u scroll half-up
+map d scroll half-down
+
 set selection-clipboard clipboard 
 include catppucin-mocha
 iset sandbox none 
