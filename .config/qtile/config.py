@@ -14,7 +14,7 @@ from libqtile.widget.textbox import TextBox
 mod = 'mod4'
 terminal = 'alacritty'
 
-#The that I'm currently using
+#The theme that I'm currently using
 Catppuccin = [['#a6e3a1', '#a6e3a1'],
             ['#cba6f7', '#cba6f7'],
             ['#313244', '#313244']]
@@ -25,12 +25,13 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
 
     #To change keyboard layout 
-    Key([mod, 'shift'], 'e',
-        lazy.spawn('setxkbmap -layout latam'),
-        desc='Change keyboard layout'),
-    Key([mod, 'shift'], 'i',
-        lazy.spawn('setxkbmap us'),
-        desc='Change keyboard layout us'),
+    Key([mod], 'i',
+        lazy.spawn('tlenguage'),
+        desc='Toggle keyboard layout us-latam'),
+
+    Key([mod], 'm',
+        lazy.spawn('tmic'),
+        desc='Toggle microphone'),
     
     # Launch with rofi 
     Key([mod], 'a',
@@ -61,6 +62,15 @@ keys = [
     Key([], 'XF86AudioMute',
         lazy.spawn('changevolume mute'),
         desc='Mute'),
+
+    Key([mod], 'Left',
+        lazy.screen.prev_group(),
+        desc = 'Switch to the left desktop'),
+
+    Key([mod], 'Right',
+        lazy.screen.next_group(),
+        desc = 'Switch to the right desktop'),
+    
 
    
     # Toggle Fullscreen and floating mode 
