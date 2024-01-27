@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Script that toggle between layouts
+
+layout=$(setxkbmap -query | grep layout | awk '{print $2}')
+
+if [ "$layout" = "us" ]
+then
+	setxkbmap -layout latam
+	dunstify "Keyboard layout latam" -u low -r 7771  
+else
+	setxkbmap -layout us
+	dunstify "Keyboard layout us" -u low -r 7771  
+fi 

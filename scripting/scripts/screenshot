@@ -1,0 +1,21 @@
+#!/bin/bash
+
+output="/home/isra/Pictures/screenshots/%Y-%m-%d-%T-screenshot.png"
+
+#Take an screenshot of a selectes area, window or fullscreen
+case "$1" in
+	"select") scrot "$output" --select --line mode=edge || exit ;;
+	"window") scrot "$output" --focused --border || exit ;;
+	*) scrot "$output" || exit ;;
+esac
+
+#Gets the directory of the screenshot taken
+screendir="/home/isra/Pictures/screenshots/"
+screenfile=$(ls -t -1 "$screendir"| head -n 1 )
+
+#Copy to the clipboard 
+xclip -sel clip -t image/png "$screendir/$screenfile"
+
+notify-send "Screenshot taken."
+
+

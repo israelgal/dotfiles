@@ -122,8 +122,8 @@ return {
       "<leader>no",
       function()
         require("telescope.builtin").find_files({
-          prompt_title = "LaTeX Snippets",
-          cwd = "~/Documents/2023/notes/",
+          prompt_title = "Latex notes",
+          cwd = "~/Documents/2024/notes/",
 		  file_ignore_patterns = {
 		    "%.aux$", "%.fdb_latexmk$", "%.fls$", "%.log$", "%.pdf$", "%.synctex.gz$"
 		  },

@@ -1,0 +1,14 @@
+#!/bin/bash
+# A little script to toggle mi mic 
+
+mic_statu=$(pamixer --source 1 --get-mute)
+
+
+if [ "$mic_statu" = "true" ]
+then
+	pamixer -t --source 1
+	dunstify "Microphone unmuted" -u low -r 7776  
+else
+	pamixer -t --source 1
+	dunstify "Microphone muted" -u low -r 7776  
+fi
