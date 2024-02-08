@@ -18,6 +18,9 @@ alias nvc='cd ~/.config/nvim/'
 
 # Bare repository 
 alias bare="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+alias bs='bare status'
+alias ba='bare add'
+alias bc='bare commit -m'
 
 # Bash aliases and config files
 alias b='v ~/.bashrc'
@@ -30,15 +33,17 @@ alias d='deactivate'
 
 # Miscelaneous
 alias pdf='nohup zathura'
-alias wk='cd ~/Documents/2023/'
-alias notes='cd ~/Documents/2023/notes/ && v'
+alias wk='cd ~/Documents/2024/'
+alias notes='cd ~/Documents/2024/notes/ && v'
 alias s='cd ~/scripting/'
+alias ds='cd ~/data_science/ && venv'
 
 #Git aliases 
 alias ga='git add'
 alias gm='git commit -m'
 alias gp='git push'
 alias gs='git status'
+alias gl='git pull'
 
 # Latex notes sync
 alias ns='cd ~/Documents/2024/notes/ && git pull'

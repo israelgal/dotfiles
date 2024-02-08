@@ -30,4 +30,12 @@ s({trig = 'un', snippetType="autosnippet", dscr = 'Unitary vector'},
 		),
 	{condition = in_mathzone}
 ),
+s({trig = 'hb', snippetType="autosnippet", dscr = 'hbar'},
+	{ t("\\hbar")   },
+	{condition = in_mathzone}
+),
+s({trig = 'ell', snippetType="autosnippet", dscr = 'ell command'},
+	{ t("\\ell")   },
+	{condition = in_mathzone}
+),
 }

@@ -24,6 +24,13 @@ keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
 
+
+
+    # Toggle qtile bar 
+    Key([mod], 'b',
+        lazy.hide_show_bar(),
+        desc='Toggle qtile bar'),
+
     #To change keyboard layout 
     Key([mod], 'i',
         lazy.spawn('tlenguage'),
@@ -192,8 +199,8 @@ for i in groups:
 
 #This is my layout, I write this 
 layout_theme = {
-        'border_width':3,
-        'margin':8,
+        'border_width':2,
+        'margin':2,
         'border_focus':'#a6e3a1',
         'border_normal':'#cba6f7'
 }

@@ -44,4 +44,8 @@ s({trig = 'rf', snippetType="autosnippet", dscr = 'ref command'},
   ),
    {condition = in_text }
 ),
+s({trig = 'qq', snippetType="autosnippet", dscr = 'qquad command'},
+	{ t("\\qquad")   },
+	{condition = in_mathzone}
+),
 }

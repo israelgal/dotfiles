@@ -81,8 +81,16 @@ s({trig = 'pi', snippetType="autosnippet", dscr = 'pi'},
 	{ t("\\pi")   },
 	{condition = in_mathzone}
 ),
-s({trig = 'te', snippetType="autosnippet", dscr = 'theta'},
+s({trig = 'th', snippetType="autosnippet", dscr = 'theta'},
 	{ t("\\theta")   },
+	{condition = in_mathzone}
+),
+s({trig = 'De', snippetType="autosnippet", dscr = 'Delta'},
+	{ t("\\Delta")   },
+	{condition = in_mathzone}
+),
+s({trig = 'nu', snippetType="autosnippet", dscr = 'nu'},
+	{ t("\\nu")   },
 	{condition = in_mathzone}
 ),
 }

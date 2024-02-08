@@ -32,6 +32,21 @@ s({trig="eq", snippetType="autosnippet", dscr="A LaTeX equation environment"},
 		),
 		{condition = line_begin}
 ),
+s({trig="qe", snippetType="autosnippet", dscr="A LaTeX equation environment"},
+	fmta(
+		[[
+			\begin{equation*}
+				<>
+			\end{equation*}
+			<>
+		]],
+		{ 
+			i(1),
+			i(0),
+		}
+		),
+		{condition = line_begin}
+),
 s( {trig = '([^%a])mm', snippetType = "autosnippet", wordTrig = false, regTrig = true, dscr = 'inline math environment'},
 	fmta(
 		"<>$<>$", 
@@ -66,7 +81,7 @@ s({trig="new", snippetType = 'autosnippet', dscr="A generic new environmennt"},
 	),
 	{condition = line_begin}
 ),
-s({trig="it", snippetType = 'autosnippet', dscr="Itemize environment"},
+s({trig="nit", snippetType = 'autosnippet', dscr="Itemize environment"},
 	fmta(
 	[[
 		\begin{itemize}
@@ -82,6 +97,24 @@ s({trig="it", snippetType = 'autosnippet', dscr="Itemize environment"},
 s({trig="lf(", snippetType = "autosnippet", dscr= ' () envinronment'},
 	fmta(
 	"\\left ( <> \\right )",
+    {
+		i(1),
+    }
+	),
+		{condition = in_mathzone}
+),
+s({trig="lf[", snippetType = "autosnippet", dscr= ' () envinronment'},
+	fmta(
+	"\\left [ <> \\right ]",
+    {
+		i(1),
+    }
+	),
+		{condition = in_mathzone}
+),
+s({trig="lf{", snippetType = "autosnippet", dscr= ' () envinronment'},
+	fmta(
+		"\\left \\{ <> \\right \\}",
     {
 		i(1),
     }

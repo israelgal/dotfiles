@@ -27,7 +27,7 @@ s({trig = '([^%a])ee', snippetType="autosnippet", regTrig = true, wordTrig = fal
   ),
    {condition = in_mathzone}
 ),
-s( { trig = '([%a%)%]%}])00', regTrig = true, wordTrig = false, snippetType = 'autosnippet'},
+s( { trig = '([%a%)%]%}])oo', regTrig = true, wordTrig = false, snippetType = 'autosnippet'},
 	fmta(
 		"<>_{<>}",
 		{
@@ -36,7 +36,7 @@ s( { trig = '([%a%)%]%}])00', regTrig = true, wordTrig = false, snippetType = 'a
 		}
 	)
 ),
-s( { trig = '([%a%)%]%}])01', regTrig = true, wordTrig = false, snippetType = 'autosnippet'},
+s( { trig = '([%a%)%]%}])oi', regTrig = true, wordTrig = false, snippetType = 'autosnippet'},
 	fmta(
 		"<>^{<>}",
 		{
@@ -64,7 +64,7 @@ s({trig = 'cr', snippetType="autosnippet", dscr = 'Curl operation '},
 	{ t("\\nabla \\times ")   },
 	{condition = in_mathzone}
 ),
-s({trig = 'di', snippetType="autosnippet", dscr = 'Divergency operation'},
+s({trig = 'div', snippetType="autosnippet", dscr = 'Divergency operation'},
 	{ t("\\nabla \\cdot ")   },
 	{condition = in_mathzone}
 ),
@@ -114,7 +114,7 @@ s({trig = "sh", snippetType = "autosnippet", dscr = 'sinh function'},
   { t("\\sinh")   },
   {condition = in_mathzone}  
 ),
-s({trig = "th", snippetType = "autosnippet", dscr = 'tanh function'},
+s({trig = "ht", snippetType = "autosnippet", dscr = 'tanh function'},
   { t("\\tanh")   },
   {condition = in_mathzone}  
 ),
@@ -150,6 +150,29 @@ s({trig = "ex", snippetType = "autosnippet", dscr = 'exp form'},
       i(1),
     }
   ),
+  {condition = in_mathzone}  
+),
+s({trig = "pl", snippetType = "autosnippet", dscr = '+ symbol'},
+  { t("+")   },
+  {condition = in_mathzone}  
+),
+s({trig = "din", snippetType = "autosnippet", dscr = 'Definite int'},
+  fmta(
+			"\\int_{ <> }^{ <> } <> ", 
+    {
+      i(1, "a"),
+	  i(2, "b"),
+	  i(3),
+    }
+  ),
+  {condition = in_mathzone}  
+),
+s({trig = "lg", snippetType = "autosnippet", dscr = 'log symbol'},
+  { t("\\text{log}") },
+  {condition = in_mathzone}  
+),
+s({trig = "int", snippetType = "autosnippet", dscr = 'indefinite integral'},
+  { t("\\int") },
   {condition = in_mathzone}  
 ),
 }
