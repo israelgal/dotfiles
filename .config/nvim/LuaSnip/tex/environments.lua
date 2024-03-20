@@ -49,7 +49,7 @@ s({trig="qe", snippetType="autosnippet", dscr="A LaTeX equation environment"},
 ),
 s( {trig = '([^%a])mm', snippetType = "autosnippet", wordTrig = false, regTrig = true, dscr = 'inline math environment'},
 	fmta(
-		"<>$<>$", 
+		"<>$ <> $ ", 
 		{
 			f( function(_, snip) return snip.captures[1] end ),
 			d(1, get_visual),

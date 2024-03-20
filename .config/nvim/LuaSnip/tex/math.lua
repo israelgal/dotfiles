@@ -34,7 +34,8 @@ s( { trig = '([%a%)%]%}])oo', regTrig = true, wordTrig = false, snippetType = 'a
 			f( function(_, snip) return snip.captures[1] end ),
 			i(1)
 		}
-	)
+	),
+	{condition = in_mathzone}
 ),
 s( { trig = '([%a%)%]%}])oi', regTrig = true, wordTrig = false, snippetType = 'autosnippet'},
 	fmta(
@@ -43,7 +44,8 @@ s( { trig = '([%a%)%]%}])oi', regTrig = true, wordTrig = false, snippetType = 'a
 			f( function(_, snip) return snip.captures[1] end ),
 			i(1)
 		}
-	)
+	),
+	{condition = in_mathzone}
 ),
 s({trig = "df", snippetType = "autosnippet", dscr = 'differential operator'},
   { t("\\diff") },
@@ -173,6 +175,10 @@ s({trig = "lg", snippetType = "autosnippet", dscr = 'log symbol'},
 ),
 s({trig = "int", snippetType = "autosnippet", dscr = 'indefinite integral'},
   { t("\\int") },
+  {condition = in_mathzone}  
+),
+s({trig = "infty", snippetType = "autosnippet", dscr = 'Infinity symbol'},
+  { t("\\infty") },
   {condition = in_mathzone}  
 ),
 }

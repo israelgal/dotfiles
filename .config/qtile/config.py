@@ -1,15 +1,21 @@
 
 # Qtile configuration 
-# User: Israelgal
+# User: Israelgal AKA TheDirtyDan
 
 import os
 import subprocess
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
+# from libqtile.utils import guess_terminal
 from libqtile import hook
-from libqtile.widget.textbox import TextBox
+# from libqtile.widget.textbox import TextBox
+
+def power():
+    qtile.cmd_spawn('powermenu')
+
+def search():
+    qtile.cmd_spawn('rofi -show drun')
 
 mod = 'mod4'
 terminal = 'alacritty'
@@ -20,33 +26,53 @@ Catppuccin = [['#a6e3a1', '#a6e3a1'],
             ['#313244', '#313244']]
 
 
+# sakura theme 
+# ctheme = [['#1F1D2E','#1F1D2E'], # Color used in layout
+#           ['#282738','#282738'], # Color used in first spacer
+#           ['#CAA9E0','#CAA9E0'], # Active color in bar
+#           ['#91B1F0','#91B1F0'], # block_h_t_c 
+#           ['#4B427E','#4B427E'], # highlight color  
+#           ['#353446','#353446'], # background color
+#           ]
+# color_path = '~/.config/qtile/Assets/Sakura/'
+
+# natura theme 
+ctheme = [['#1F1D2E','#1F1D2E'], # Color used in layout
+          ['#0F1212','#0F1212'], # Color used in first spacer
+          ['#607767','#607767'], # Active color in bar
+          ['#B2BEBC', '#B2BEBC'], # block_h_t_c 
+          ['#D0DAF0','#D0DAF0'], # highlight color  
+          ['#202222','#202222'], # background color
+          ]
+color_path = '~/.config/qtile/Assets/Natura/'
+
+
+
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
 
 
+    # Miscellaneous commands 
 
-    # Toggle qtile bar 
     Key([mod], 'b',
         lazy.hide_show_bar(),
         desc='Toggle qtile bar'),
-
-    #To change keyboard layout 
     Key([mod], 'i',
         lazy.spawn('tlenguage'),
         desc='Toggle keyboard layout us-latam'),
+    # Key([mod], 'm',
+    #     lazy.spawn('tmic'),
+    #     desc='Toggle microphone'),
+    Key([mod, 'shift'], 'f',
+        lazy.spawn('firefox'),
+        desc='Launch firefox'),
 
-    Key([mod], 'm',
-        lazy.spawn('tmic'),
-        desc='Toggle microphone'),
-    
     # Launch with rofi 
     Key([mod], 'a',
         lazy.spawn('rofi -show drun'),
         desc='Launch rofi app instance'),
-    Key([mod], 'c',
-        lazy.spawn('rofi -show calc'),
-        desc='Launch rofi calc instance'),
 
     # Screenshot tool 
     Key([mod], 'p',
@@ -55,9 +81,6 @@ keys = [
     Key([mod, 'shift'], 'p',
         lazy.spawn('screenshot'),
         desc='Screenshot'),
-    Key([mod, 'shift'], 'f',
-        lazy.spawn('firefox'),
-        desc='Launch firefox'),
     
     #Change volume program
     Key([], 'XF86AudioRaiseVolume',
@@ -70,15 +93,14 @@ keys = [
         lazy.spawn('changevolume mute'),
         desc='Mute'),
 
+    # Moving between groups 
     Key([mod], 'Left',
         lazy.screen.prev_group(),
         desc = 'Switch to the left desktop'),
-
     Key([mod], 'Right',
         lazy.screen.next_group(),
         desc = 'Switch to the right desktop'),
     
-
    
     # Toggle Fullscreen and floating mode 
     Key([mod], 'f',
@@ -171,8 +193,11 @@ keys = [
         desc='Spawn a command using a prompt widget'),
 ]
 
-groups = [Group(i) for i in '123456789']
+# groups = [Group(f"{i+1}", label="") for i in range(8)]
 
+groups = [ Group(i) for i in '12345678']
+groups.append(Group("9", label="")) 
+#󰎆
 for i in groups:
     keys.extend(
         [
@@ -198,16 +223,49 @@ for i in groups:
     )
 
 #This is my layout, I write this 
-layout_theme = {
-        'border_width':2,
-        'margin':2,
-        'border_focus':'#a6e3a1',
-        'border_normal':'#cba6f7'
-}
-
 
 layouts = [
-    layout.MonadTall(**layout_theme),
+   layout.MonadTall(
+        border_focus=ctheme[2],
+        border_normal=ctheme[0],
+        margin=2,
+        border_width=2,
+    ),
+
+    layout.Columns( margin= [10,10,10,10], border_focus= ctheme[0],
+	    border_normal=ctheme[0],
+        border_width=0,
+    ),
+
+    layout.Max(	border_focus=ctheme[0],
+	    border_normal=ctheme[0],
+	    margin=10,
+	    border_width=0,
+    ),
+
+    layout.Floating(	border_focus=ctheme[0],
+	    border_normal=ctheme[0],
+	    margin=10,
+	    border_width=0,
+	),
+    # Try more layouts by unleashing below layouts
+   #  layout.Stack(num_stacks=2),
+   #  layout.Bsp(),
+     layout.Matrix(	border_focus=ctheme[0],
+	    border_normal=ctheme[0],
+	    margin=10,
+	    border_width=0,
+	),
+
+    layout.MonadWide(	border_focus=ctheme[0],
+	    border_normal=ctheme[0],
+	    margin=10,
+	    border_width=0,
+	),
+   #  layout.RatioTile(),
+     layout.Tile(	border_focus=ctheme[0],
+	    border_normal=ctheme[0],
+    ),
 ]
 
 widget_defaults = dict(
@@ -217,43 +275,257 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+
+
 screens = [
     Screen(
         top=bar.Bar(
-            [   
-                widget.NvidiaSensors(),
+            [
                 widget.Spacer(
-                    desc = 'Is the blank space into the left'
-                    ),
+                    length=15,
+                    background= ctheme[1]),
+
+                widget.Image(
+                    filename= color_path + 'launch_Icon.png',
+                    margin=2,
+                    background=ctheme[1],
+                    mouse_callbacks={'Button1':power},
+                ),
+ 
+                widget.Image(
+                    filename= color_path + '6.png',
+                ),
 
                 widget.GroupBox(
+                    fontsize=18,
+                    border_width=3,
                     highlight_method = 'block',
-                    block_highlight_text_color = 'ffffff',#Catppuccin[1],
-                    disable_drag = True,
-                    inactive = 'ffffff',
-                    rounded = False,
-                    active = Catppuccin[1],
-                    this_current_screen_border = Catppuccin[0]
+                    active = ctheme[2],
+                    block_highlight_text_color = ctheme[3],
+                    highlight_color= ctheme[4],
+                    inactive=ctheme[1],
+                    foreground=ctheme[4],
+                    background= ctheme[5],
+                    this_current_screen_border=ctheme[5],
+                    this_screen_border=ctheme[5],
+                    other_current_screen_border=ctheme[5],
+                    other_screen_border=ctheme[5],
+                    urgent_border=ctheme[5],
+                    rounded=True,
+                    disable_drag=True,
+                    font="JetBrains Mono Bold",
                     ),
+                
+                widget.Spacer(
+                    length=8,
+                    background=ctheme[5],
+                ),
+                
+                widget.Image(
+                    filename= color_path + '1.png',
+                ),
+                
+                widget.Image(
+                    filename= color_path + 'layout.png',
+                    background=ctheme[5],
+                ),
 
 
-                widget.Spacer(),
+                widget.CurrentLayout(
+                    background=ctheme[5],
+                    foreground=ctheme[2],
+                    fmt='{}',
+                    font="JetBrains Mono Bold",
+                    fontsize=13,
+                ),
 
-                widget.Systray(),
+                widget.Image(
+                    filename= color_path + '5.png',
+                ),
+
+
+                widget.Image(
+                    filename= color_path  + 'search.png',
+                    margin=2,
+                    background=ctheme[1],
+                    mouse_callbacks={"Button1": search},
+                ),
+
+                widget.TextBox(
+                    fmt='Search',
+                    background=ctheme[1],
+                    font="JetBrains Mono Bold",
+                    fontsize=13,
+                    foreground=ctheme[2],
+                    mouse_callbacks={"Button1": search},
+                ),
+
+                widget.Image(
+                    filename= color_path + '4.png',
+                ),
+
+
+                widget.WindowName(
+                    background = ctheme[5],
+                    format = "{name}",
+                    font='JetBrains Mono Bold',
+                    foreground=ctheme[2],
+                    empty_group_string = 'Desktop',
+                    fontsize=13,
+
+                ),
+
+
+                widget.Image(
+                    filename= color_path + '3.png',
+                ),
+
+                widget.Systray(
+                    background=ctheme[1],
+                    fontsize=2,
+                ),
+
+
+                widget.TextBox(
+                    text=' ',
+                    background=ctheme[1],
+                ),
+
+
+                # widget.Image(
+                #     filename= color_path + '6.png',
+                #     background=ctheme[5],
+                # ),
+                #
+
+                # widget.Image(
+                #     filename= color_path + 'Misc/ram.png',
+                #     background=ctheme[5],
+                # ),
+                #
+                #
+                #
+                # widget.Spacer(
+                #     length=-7,
+                #     background=ctheme[5],
+                # ),
+                #
+                #
+                # widget.Memory(
+                #     background=ctheme[5],
+                #     format='{MemUsed: .0f}{mm}',
+                #     foreground=ctheme[2],
+                #     font="JetBrains Mono Bold",
+                #     fontsize=13,
+                #     update_interval=5,
+                # ),
+
+                # widget.Image(
+                #     filename= color_path + '2.png',
+                # ),
+                #
+
+                # widget.Spacer(
+                #     length=8,
+                #     background=ctheme[5],
+                # ),
+
+                # widget.TextBox(
+                #     fmt = '󰏈',
+                #     background=ctheme[5],
+                #     foreground=ctheme[2],
+                #     font="JetBrains Mono Bold",
+                #     fontsize=15,
+                # ),
+                #
+                # widget.Spacer(
+                #     length=5,
+                #     background=ctheme[5],
+                # ),
+                #
+                # widget.NvidiaSensors(
+                #     background=ctheme[5],
+                #     # format='{MemUsed: .0f}{mm}',
+                #     foreground=ctheme[2],
+                #     font="JetBrains Mono Bold",
+                #     fontsize=13,
+                #     update_interval=5,
+                # ),
+
+                
+                # widget.Image(
+                #     filename= color_path + '2.png',
+                # ),
+                #
+
+                # widget.Spacer(
+                #     length=8,
+                #     background=ctheme[5],
+                # ),
+
+                # widget.Volume(
+                #     font='JetBrainsMono Nerd Font',
+                #     theme_path= color_path + 'Volume/',
+                #     emoji=True,
+                #     fontsize=13,
+                #     background=ctheme[5],
+                # ),
+
+                # widget.pulse_volume.PulseVolume(
+                #     font='JetBrainsMono Nerd Font',
+                #     theme_path= color_path + 'Volume/',
+                #     emoji=True,
+                #     fontsize=13,
+                #     background=ctheme[5],
+                # ),
+
+                # widget.Spacer(
+                #     length=-5,
+                #     background=ctheme[5],
+                #     ),
+                #
+                #
+                # widget.Volume(
+                #     font='JetBrains Mono Bold',
+                #     background=ctheme[5],
+                #     foreground=ctheme[2],
+                #     fontsize=13,
+                # ),
+
+
+                # widget.Image(
+                #     filename= color_path + '5.png',
+                #     background=ctheme[5],
+                # ),
+
+
+                widget.Image(
+                    filename= color_path + 'Misc/clock.png',
+                    background=ctheme[1],
+                    margin_y=6,
+                    margin_x=5,
+                ),
+
 
                 widget.Clock(
-                    format='%A%e/%m  %k:%M', padding = 5
-                    ),
+                    format='%I:%M %p',
+                    background=ctheme[1],
+                    foreground=ctheme[2],
+                    font="JetBrains Mono Bold",
+                    fontsize=15,
+                ),
 
-                widget.TextBox(fmt = ' ',
-                               mouse_callbacks = {"Button1": lazy.spawn('powermenu')},                               padding = 10
-                               )
+
+                widget.Spacer(
+                    length=18,
+                    background=ctheme[1],
+                ),
+
             ],
-            size = 24,
-            background = Catppuccin[2]
-            
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            size = 30,
+            border_color = ctheme[1],
+            border_width = [0,0,0,0],
+            margin = [6,40,6,40],
         ),
     ),
 ]
@@ -270,6 +542,7 @@ dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
+
 floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.

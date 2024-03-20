@@ -48,4 +48,12 @@ s({trig = 'qq', snippetType="autosnippet", dscr = 'qquad command'},
 	{ t("\\qquad")   },
 	{condition = in_mathzone}
 ),
+s({trig = 'Schrodinger', snippetType="autosnippet", dscr = 'name schrodinger'},
+	{ t("Schrödinger")   },
+	{condition = in_text}
+),
+s({trig = 'Poschl', snippetType="autosnippet", dscr = 'name Poschl'},
+	{ t("Pöschl")   },
+	{condition = in_text}
+),
 }

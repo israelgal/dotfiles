@@ -37,6 +37,7 @@ alias wk='cd ~/Documents/2024/'
 alias notes='cd ~/Documents/2024/notes/ && v'
 alias s='cd ~/scripting/'
 alias ds='cd ~/data_science/ && venv'
+alias c='clear'
 
 #Git aliases 
 alias ga='git add'

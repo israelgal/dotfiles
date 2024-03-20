@@ -7,7 +7,7 @@ return{
 		vim.cmd('syntax enable')
 		vim.g['vimtex_view_method'] = 'zathura'
 		vim.g['vimtex_quickfix_ode'] = 0
-		vim.o.conceallevel = 1
+		vim.o.conceallevel = 0
 
 		-- Disable autoindentation for LaTeX files
 		vim.cmd('autocmd FileType tex setlocal noautoindent')
