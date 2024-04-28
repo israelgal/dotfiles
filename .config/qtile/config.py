@@ -17,36 +17,26 @@ def power():
 def search():
     qtile.cmd_spawn('rofi -show drun')
 
+def my_parse(text):
+    for string in [" - Chromium", " - Firefox"]: 
+        text = text.replace(string, "") 
+    return text
+
 mod = 'mod4'
 terminal = 'alacritty'
 
+my_theme = {
+    "black": "#000000",
+    "white": "#FFFFFF",
+    "green": "#a6e3a1",
+    "brose": "#191724",
+    "bpaper": "#1c1c1c",
+    "pgreen": "#5faf5f",
+}
 #The theme that I'm currently using
 Catppuccin = [['#a6e3a1', '#a6e3a1'],
             ['#cba6f7', '#cba6f7'],
             ['#313244', '#313244']]
-
-
-# sakura theme 
-# ctheme = [['#1F1D2E','#1F1D2E'], # Color used in layout
-#           ['#282738','#282738'], # Color used in first spacer
-#           ['#CAA9E0','#CAA9E0'], # Active color in bar
-#           ['#91B1F0','#91B1F0'], # block_h_t_c 
-#           ['#4B427E','#4B427E'], # highlight color  
-#           ['#353446','#353446'], # background color
-#           ]
-# color_path = '~/.config/qtile/Assets/Sakura/'
-
-# natura theme 
-ctheme = [['#1F1D2E','#1F1D2E'], # Color used in layout
-          ['#0F1212','#0F1212'], # Color used in first spacer
-          ['#607767','#607767'], # Active color in bar
-          ['#B2BEBC', '#B2BEBC'], # block_h_t_c 
-          ['#D0DAF0','#D0DAF0'], # highlight color  
-          ['#202222','#202222'], # background color
-          ]
-color_path = '~/.config/qtile/Assets/Natura/'
-
-
 
 
 keys = [
@@ -196,7 +186,7 @@ keys = [
 # groups = [Group(f"{i+1}", label="") for i in range(8)]
 
 groups = [ Group(i) for i in '12345678']
-groups.append(Group("9", label="")) 
+groups.append(Group("9", label=" ")) 
 #󰎆
 for i in groups:
     keys.extend(
@@ -226,45 +216,10 @@ for i in groups:
 
 layouts = [
    layout.MonadTall(
-        border_focus=ctheme[2],
-        border_normal=ctheme[0],
-        margin=2,
-        border_width=2,
-    ),
-
-    layout.Columns( margin= [10,10,10,10], border_focus= ctheme[0],
-	    border_normal=ctheme[0],
-        border_width=0,
-    ),
-
-    layout.Max(	border_focus=ctheme[0],
-	    border_normal=ctheme[0],
-	    margin=10,
-	    border_width=0,
-    ),
-
-    layout.Floating(	border_focus=ctheme[0],
-	    border_normal=ctheme[0],
-	    margin=10,
-	    border_width=0,
-	),
-    # Try more layouts by unleashing below layouts
-   #  layout.Stack(num_stacks=2),
-   #  layout.Bsp(),
-     layout.Matrix(	border_focus=ctheme[0],
-	    border_normal=ctheme[0],
-	    margin=10,
-	    border_width=0,
-	),
-
-    layout.MonadWide(	border_focus=ctheme[0],
-	    border_normal=ctheme[0],
-	    margin=10,
-	    border_width=0,
-	),
-   #  layout.RatioTile(),
-     layout.Tile(	border_focus=ctheme[0],
-	    border_normal=ctheme[0],
+        border_focus= my_theme['white'],
+        border_normal= my_theme['black'],
+        margin=3,
+        border_width=1,
     ),
 ]
 
@@ -272,6 +227,7 @@ widget_defaults = dict(
     font='JetbrainsMono Nerd Font',
     fontsize=15,
     padding=3,
+    background = my_theme['bpaper'],
 )
 extension_defaults = widget_defaults.copy()
 
@@ -281,251 +237,52 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Spacer(
-                    length=15,
-                    background= ctheme[1]),
+
 
                 widget.Image(
-                    filename= color_path + 'launch_Icon.png',
-                    margin=2,
-                    background=ctheme[1],
+                    filename= '~/.config/qtile/Assets/icons/archlinux-icon-crystal-16.svg',
+                    margin= 6,
                     mouse_callbacks={'Button1':power},
-                ),
- 
-                widget.Image(
-                    filename= color_path + '6.png',
                 ),
 
                 widget.GroupBox(
-                    fontsize=18,
+                    fontsize=15,
                     border_width=3,
-                    highlight_method = 'block',
-                    active = ctheme[2],
-                    block_highlight_text_color = ctheme[3],
-                    highlight_color= ctheme[4],
-                    inactive=ctheme[1],
-                    foreground=ctheme[4],
-                    background= ctheme[5],
-                    this_current_screen_border=ctheme[5],
-                    this_screen_border=ctheme[5],
-                    other_current_screen_border=ctheme[5],
-                    other_screen_border=ctheme[5],
-                    urgent_border=ctheme[5],
+                    highlight_method = 'line',
+                    active = my_theme["white"],
+                    highlight_color= [ my_theme["bpaper"], my_theme["green"]],
                     rounded=True,
                     disable_drag=True,
                     font="JetBrains Mono Bold",
                     ),
-                
-                widget.Spacer(
-                    length=8,
-                    background=ctheme[5],
-                ),
-                
-                widget.Image(
-                    filename= color_path + '1.png',
-                ),
-                
-                widget.Image(
-                    filename= color_path + 'layout.png',
-                    background=ctheme[5],
-                ),
 
-
-                widget.CurrentLayout(
-                    background=ctheme[5],
-                    foreground=ctheme[2],
-                    fmt='{}',
-                    font="JetBrains Mono Bold",
-                    fontsize=13,
-                ),
-
-                widget.Image(
-                    filename= color_path + '5.png',
-                ),
-
-
-                widget.Image(
-                    filename= color_path  + 'search.png',
-                    margin=2,
-                    background=ctheme[1],
-                    mouse_callbacks={"Button1": search},
-                ),
-
-                widget.TextBox(
-                    fmt='Search',
-                    background=ctheme[1],
-                    font="JetBrains Mono Bold",
-                    fontsize=13,
-                    foreground=ctheme[2],
-                    mouse_callbacks={"Button1": search},
-                ),
-
-                widget.Image(
-                    filename= color_path + '4.png',
-                ),
 
 
                 widget.WindowName(
-                    background = ctheme[5],
                     format = "{name}",
-                    font='JetBrains Mono Bold',
-                    foreground=ctheme[2],
+                    max_chars = 40,
+                    font='JetBrains Mono',
+                    # foreground=ctheme[2],
                     empty_group_string = 'Desktop',
                     fontsize=13,
-
-                ),
-
-
-                widget.Image(
-                    filename= color_path + '3.png',
+                    parse_text = my_parse,
                 ),
 
                 widget.Systray(
-                    background=ctheme[1],
                     fontsize=2,
                 ),
 
-
-                widget.TextBox(
-                    text=' ',
-                    background=ctheme[1],
-                ),
-
-
-                # widget.Image(
-                #     filename= color_path + '6.png',
-                #     background=ctheme[5],
-                # ),
-                #
-
-                # widget.Image(
-                #     filename= color_path + 'Misc/ram.png',
-                #     background=ctheme[5],
-                # ),
-                #
-                #
-                #
-                # widget.Spacer(
-                #     length=-7,
-                #     background=ctheme[5],
-                # ),
-                #
-                #
-                # widget.Memory(
-                #     background=ctheme[5],
-                #     format='{MemUsed: .0f}{mm}',
-                #     foreground=ctheme[2],
-                #     font="JetBrains Mono Bold",
-                #     fontsize=13,
-                #     update_interval=5,
-                # ),
-
-                # widget.Image(
-                #     filename= color_path + '2.png',
-                # ),
-                #
-
-                # widget.Spacer(
-                #     length=8,
-                #     background=ctheme[5],
-                # ),
-
-                # widget.TextBox(
-                #     fmt = '󰏈',
-                #     background=ctheme[5],
-                #     foreground=ctheme[2],
-                #     font="JetBrains Mono Bold",
-                #     fontsize=15,
-                # ),
-                #
-                # widget.Spacer(
-                #     length=5,
-                #     background=ctheme[5],
-                # ),
-                #
-                # widget.NvidiaSensors(
-                #     background=ctheme[5],
-                #     # format='{MemUsed: .0f}{mm}',
-                #     foreground=ctheme[2],
-                #     font="JetBrains Mono Bold",
-                #     fontsize=13,
-                #     update_interval=5,
-                # ),
-
-                
-                # widget.Image(
-                #     filename= color_path + '2.png',
-                # ),
-                #
-
-                # widget.Spacer(
-                #     length=8,
-                #     background=ctheme[5],
-                # ),
-
-                # widget.Volume(
-                #     font='JetBrainsMono Nerd Font',
-                #     theme_path= color_path + 'Volume/',
-                #     emoji=True,
-                #     fontsize=13,
-                #     background=ctheme[5],
-                # ),
-
-                # widget.pulse_volume.PulseVolume(
-                #     font='JetBrainsMono Nerd Font',
-                #     theme_path= color_path + 'Volume/',
-                #     emoji=True,
-                #     fontsize=13,
-                #     background=ctheme[5],
-                # ),
-
-                # widget.Spacer(
-                #     length=-5,
-                #     background=ctheme[5],
-                #     ),
-                #
-                #
-                # widget.Volume(
-                #     font='JetBrains Mono Bold',
-                #     background=ctheme[5],
-                #     foreground=ctheme[2],
-                #     fontsize=13,
-                # ),
-
-
-                # widget.Image(
-                #     filename= color_path + '5.png',
-                #     background=ctheme[5],
-                # ),
-
-
-                widget.Image(
-                    filename= color_path + 'Misc/clock.png',
-                    background=ctheme[1],
-                    margin_y=6,
-                    margin_x=5,
-                ),
-
-
-                widget.Clock(
+                 widget.Clock(
                     format='%I:%M %p',
-                    background=ctheme[1],
-                    foreground=ctheme[2],
-                    font="JetBrains Mono Bold",
-                    fontsize=15,
+                    foreground= my_theme["white"],
+                    font="JetBrains Mono",
+                    fontsize=13,
                 ),
-
-
-                widget.Spacer(
-                    length=18,
-                    background=ctheme[1],
-                ),
-
             ],
             size = 30,
-            border_color = ctheme[1],
-            border_width = [0,0,0,0],
-            margin = [6,40,6,40],
+            border_color = my_theme['white'],
+            border_width = [1,1,1,1],
+            margin = 3,
         ),
     ),
 ]

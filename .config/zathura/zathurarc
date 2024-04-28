@@ -1,6 +1,6 @@
 #Global configurations
 
-set recolor
+#set recolor
 
 map u scroll half-up
 map d scroll half-down

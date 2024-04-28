@@ -1,11 +1,10 @@
 
 *{
-  width:300;
-  height: 50;
+  width:250;
 }
 
 window{
-  height: 250px;
+  height: 200px;
 }
 
 inputbar{
